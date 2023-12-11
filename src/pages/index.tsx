@@ -27,8 +27,8 @@ function HeaderSection(props: { sx?: SxProps }) {
         ...props.sx,
       }}
     >
-      <Typography variant="h2" textAlign="center" color='#FF6600'>
-        <strong>A decentralized image prompt marketplace</strong>
+      <Typography variant="h2" textAlign="center" color='#328ca8'>
+        <strong>A decentralized prompt marketplace</strong>
       </Typography>
       <Typography
         color="#444648"
@@ -36,7 +36,7 @@ function HeaderSection(props: { sx?: SxProps }) {
         mt={2}
         maxWidth={580}
       >
-        where users can buy and sell prompts for AI image generators
+        where users can buy and sell prompts
       </Typography>
       <Stack direction={{ xs: "column", md: "row" }} spacing={2} mt={4} mb={8}>
         <LargeLoadingButton href="/#prompts" variant="contained">
@@ -55,11 +55,11 @@ function QuoteSection(props: { sx?: SxProps }) {
     <Box
       width={1}
       py={{ xs: 6, md: 6 }}
-      sx={{ backgroundColor: "#ff983f", ...props.sx }}
+      sx={{ backgroundColor: "#328ca8", ...props.sx }}
     >
       <Container maxWidth="md" sx={{ color: "#ffffa1", textAlign: "center" }}>
         <Typography variant="h4" fontWeight={700} mt={4}>
-          Buy and sell prompts for AI image generators, and create art that you never thought possible in Web3 world.
+          Buy and sell prompts that you never thought possible in Web3 world.
         </Typography>
         <Typography fontWeight={700} mt={4}>
           — Kate

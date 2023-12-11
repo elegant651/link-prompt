@@ -40,6 +40,7 @@ import { stringToAddress, timestampToLocaleDateString } from "@/utils/converters
 import { useAccount, useContractRead, useNetwork } from "wagmi";
 import * as yup from "yup";
 import MintNFTDialog from "@/components/nft/MintNFTDialog";
+import { makeRequest } from "@/utils/chainlink";
 
 /**
  * Page with a prompt.
@@ -83,7 +84,9 @@ export default function Prompt() {
             promptUriData={promptUriData}
           />
           {/* <ThickDivider sx={{ mt: 8, mb: 8 }} /> */}
-          {/* <PromptSandbox promptUriData={promptUriData} /> */}
+          <Box mt='25px'></Box>
+
+          <PromptSandbox promptUriData={promptUriData} />
         </>
       ) : (
         <FullWidthSkeleton />
@@ -110,7 +113,7 @@ function PromptData(props: {
     functionName: "getURI",
     args: [
       stringToAddress(props.promptUriData.author) ||
-        ethers.constants.AddressZero,
+      ethers.constants.AddressZero,
     ],
   });
   const { data: promptAuthorProfileUriData } =
@@ -158,12 +161,12 @@ function PromptData(props: {
         </WidgetContentBox>
       </WidgetBox>
       {/* Owner */}
-      {/* <WidgetBox bgcolor={palette.greyLight} mt={2}>
+      <WidgetBox bgcolor={palette.greyLight} mt={2}>
         <WidgetTitle>Owner</WidgetTitle>
         <WidgetContentBox
           display="flex"
-          flexDirection="column"
-          alignItems={{ xs: "center", md: "flex-start" }}
+          gap={1}
+          alignItems="center"
         >
           <AccountAvatar
             account={props.promptOwner}
@@ -175,9 +178,9 @@ function PromptData(props: {
             sx={{ mt: 1 }}
           />
         </WidgetContentBox>
-      </WidgetBox> */}
+      </WidgetBox>
       {/* Image */}
-      <WidgetBox bgcolor={palette.greyDark} mt={2}>
+      {/* <WidgetBox bgcolor={palette.greyDark} mt={2}>
         <WidgetTitle>Image</WidgetTitle>
         <WidgetContentBox
           display="flex"
@@ -185,14 +188,13 @@ function PromptData(props: {
           alignItems="center"
         >
           <img
-            // src={props.promptUriData.imageUrl}
-            src={'/images/b1.png'}
+            src={props.promptUriData.imageUrl}
             alt={props.promptUriData.title}
             loading="lazy"
             style={{ maxWidth: "100%", maxHeight: 400 }}
           />
         </WidgetContentBox>
-      </WidgetBox>
+      </WidgetBox> */}
       {/* Created */}
       <WidgetBox bgcolor={palette.greyDark} mt={2}>
         <WidgetTitle>Created at</WidgetTitle>
@@ -217,7 +219,7 @@ function PromptData(props: {
         {!isAddressesEqual(address, props.promptOwner) && (
           <LargeLoadingButton
             variant="contained"
-            disabled={!Boolean(promptListing)}
+            // disabled={!Boolean(promptListing)}
             onClick={() => {
               if (promptListing) {
                 showDialog?.(
@@ -263,7 +265,7 @@ function PromptData(props: {
             Show Prompt
           </LargeLoadingButton>
         )}
-        {isAddressesEqual(address, props.promptOwner) && (
+        {/* {isAddressesEqual(address, props.promptOwner) && (
           <LargeLoadingButton
             variant="outlined"
             onClick={() =>
@@ -271,7 +273,7 @@ function PromptData(props: {
                 <MintNFTDialog
                   id={props.promptId}
                   prompt={props.promptUriData.prompt}
-                  imageUrl={props.promptUriData.imageUrl}
+                  // imageUrl={props.promptUriData.imageUrl}
                   onClose={closeDialog}
                 />
               )
@@ -279,7 +281,7 @@ function PromptData(props: {
           >
             Mint NFT
           </LargeLoadingButton>
-        )}
+        )} */}
       </Stack>
     </Box>
   );
@@ -305,36 +307,52 @@ function PromptSandbox(props: { promptUriData: PromptUriDataEntity }) {
   });
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
+  // useEffect(() => {
+  //   if (props.promptUriData) {
+  //     setMessages([
+  //       {
+  //         role: "user",
+  //         content: props.promptUriData.prompt!
+  //       }
+  //     ])
+  //   }
+  // }, [props.promptUriData])
+
   /**
    * Send message to chat gpt and get response.
    */
   async function submitForm(values: any, actions: any) {
     try {
       setIsFormSubmitting(true);
-      if (!messages) {
-        throw new Error("System messages are not defined");
+      // if (!messages) {
+      //   throw new Error("System messages are not defined");
+      // }
+
+      try {
+        await makeRequest()
+      } catch (e) {
+        console.error(e)
       }
-      
-      // const { data } = await axios.post(
-      //   "https://api.openai.com/v1/chat/completions",
-      //   {
-      //     model: "gpt-3.5-turbo",
-      //     messages: [...messages, { role: "user", content: values.message }],
-      //     temperature: 0.7,
-      //   },
-      //   {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization:
-      //         "Bearer " + process.env.NEXT_PUBLIC_OPEN_AI_API_KEY_SECRET,
-      //     },
-      //   }
-      // );
-      // setMessages([
-      //   ...messages,
-      //   { role: "user", content: values.message },
-      //   data.choices?.[0]?.message,
-      // ]);
+
+      const { data } = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: props.promptUriData.prompt! }],
+          temperature: 0.7,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer " + process.env.NEXT_PUBLIC_OPEN_AI_KEY,
+          },
+        }
+      );
+      setMessages([
+        { role: "user", content: values.message },
+        data.choices?.[0]?.message,
+      ]);
 
       actions?.resetForm();
     } catch (error: any) {
@@ -347,33 +365,32 @@ function PromptSandbox(props: { promptUriData: PromptUriDataEntity }) {
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <Typography variant="h4" fontWeight={700} textAlign="center">
-        🕹️ Sandbox
+        Sandbox
       </Typography>
       <Typography textAlign="center" mt={1}>
-        to try the prompt to check out how great it is
+        to try the prompt
       </Typography>
-      {messages ? (
-        <>
-          {/* Form */}
-          <Formik
-            initialValues={formValues}
-            validationSchema={formValidationSchema}
-            onSubmit={submitForm}
-          >
-            {({ values, errors, touched, handleChange, setValues }) => (
-              <Form
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <FormikHelper
-                  onChange={(values: any) => setFormValues(values)}
-                />
-                {/* Message input */}
-                <WidgetBox bgcolor={palette.yellow} mt={2}>
+      <>
+        {/* Form */}
+        <Formik
+          initialValues={formValues}
+          // validationSchema={formValidationSchema}
+          onSubmit={submitForm}
+        >
+          {({ values, errors, touched, handleChange, setValues }) => (
+            <Form
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <FormikHelper
+                onChange={(values: any) => setFormValues(values)}
+              />
+              {/* Message input */}
+              {/* <WidgetBox bgcolor={palette.yellow} mt={2}>
                   <WidgetTitle>Message</WidgetTitle>
                   <WidgetInputTextField
                     id="message"
@@ -388,21 +405,22 @@ function PromptSandbox(props: { promptUriData: PromptUriDataEntity }) {
                     maxRows={4}
                     sx={{ width: 1 }}
                   />
-                </WidgetBox>
-                {/* Submit button */}
-                <LargeLoadingButton
-                  loading={isFormSubmitting}
-                  variant="outlined"
-                  type="submit"
-                  disabled={isFormSubmitting}
-                  sx={{ mt: 2 }}
-                >
-                  Post
-                </LargeLoadingButton>
-              </Form>
-            )}
-          </Formik>
-          {/* Messages */}
+                </WidgetBox> */}
+              {/* Submit button */}
+              <LargeLoadingButton
+                loading={isFormSubmitting}
+                variant="outlined"
+                type="submit"
+                disabled={isFormSubmitting}
+                sx={{ mt: 2 }}
+              >
+                Try it
+              </LargeLoadingButton>
+            </Form>
+          )}
+        </Formik>
+        {/* Messages */}
+        {messages ? (
           <Box width={1} mt={2}>
             {messages
               .slice(0)
@@ -432,12 +450,8 @@ function PromptSandbox(props: { promptUriData: PromptUriDataEntity }) {
                 );
               })}
           </Box>
-        </>
-      ) : (
-        <>
-          <FullWidthSkeleton />
-        </>
-      )}
+        ) : <></>}
+      </>
     </Box>
   );
 }

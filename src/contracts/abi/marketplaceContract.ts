@@ -1,312 +1,288 @@
 export const marketplaceContractAbi = [
   {
-    inputs: [],
-    stateMutability: "nonpayable",
-    type: "constructor",
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "chainid",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "marketplaceId",
+        "type": "uint256"
       },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "nftAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "listPrice",
+        "type": "uint256"
+      }
     ],
-    name: "ChainNotSupported",
-    type: "error",
+    "name": "ListingCreated",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "marketplaceId",
-        type: "uint256",
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "nftAddress",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "seller",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "listPrice",
-        type: "uint256",
-      },
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: "ListingCreated",
-    type: "event",
+    "name": "OwnershipTransferred",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "inputs": [
       {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
+        "internalType": "uint256",
+        "name": "marketplaceItemId",
+        "type": "uint256"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "nftAddress",
+        "type": "address"
+      }
     ],
-    name: "OwnershipTransferred",
-    type: "event",
+    "name": "buyListing",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "_tableId",
-    outputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
       },
+      {
+        "internalType": "address",
+        "name": "nftAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "name": "createListing",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "marketplaceItemId",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "nftAddress",
-        type: "address",
-      },
+        "internalType": "uint256",
+        "name": "marketplaceItemId",
+        "type": "uint256"
+      }
     ],
-    name: "buyListing",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
+    "name": "getListing",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "nftAddress",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256",
-      },
-    ],
-    name: "createListing",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "marketplaceItemId",
-        type: "uint256",
-      },
-    ],
-    name: "getListing",
-    outputs: [
-      {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "marketplaceId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "marketplaceId",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "nftAddress",
-            type: "address",
+            "internalType": "address",
+            "name": "nftAddress",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "tokenId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
           },
           {
-            internalType: "address payable",
-            name: "seller",
-            type: "address",
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
           },
           {
-            internalType: "address payable",
-            name: "owner",
-            type: "address",
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "listPrice",
-            type: "uint256",
-          },
+            "internalType": "uint256",
+            "name": "listPrice",
+            "type": "uint256"
+          }
         ],
-        internalType: "struct Marketplace.Listing",
-        name: "",
-        type: "tuple",
-      },
+        "internalType": "struct Marketplace.Listing",
+        "name": "",
+        "type": "tuple"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "nftAddress",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "nftAddress",
+        "type": "address"
+      }
     ],
-    name: "getListings",
-    outputs: [
+    "name": "getListings",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "marketplaceId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "marketplaceId",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "nftAddress",
-            type: "address",
+            "internalType": "address",
+            "name": "nftAddress",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "tokenId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
           },
           {
-            internalType: "address payable",
-            name: "seller",
-            type: "address",
+            "internalType": "address payable",
+            "name": "seller",
+            "type": "address"
           },
           {
-            internalType: "address payable",
-            name: "owner",
-            type: "address",
+            "internalType": "address payable",
+            "name": "owner",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "listPrice",
-            type: "uint256",
-          },
+            "internalType": "uint256",
+            "name": "listPrice",
+            "type": "uint256"
+          }
         ],
-        internalType: "struct Marketplace.Listing[]",
-        name: "",
-        type: "tuple[]",
-      },
+        "internalType": "struct Marketplace.Listing[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "sellerAddress",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "sellerAddress",
+        "type": "address"
+      }
     ],
-    name: "getSales",
-    outputs: [
+    "name": "getSales",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "sellerAddress",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "sellerAddress",
+        "type": "address"
+      }
     ],
-    name: "isSellerExists",
-    outputs: [
+    "name": "isSellerExists",
+    "outputs": [
       {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "owner",
-    outputs: [
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    stateMutability: "view",
-    type: "function",
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    inputs: [
+    "inputs": [
       {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-] as const;
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

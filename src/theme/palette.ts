@@ -17,10 +17,10 @@ declare module "@mui/material/styles" {
 
 export const palette: PaletteOptions = {
   primary: {
-    main: "#FF6600",
+    main: "#32a8a0",
   },
   secondary: {
-    main: "#ff983f",
+    main: "#328ca8",
   },
   success: {
     main: "#1DB954",

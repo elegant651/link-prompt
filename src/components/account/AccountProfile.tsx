@@ -150,18 +150,18 @@ export default function AccountProfile(props: { address: string }) {
               profileUriData?.attributes?.[4]?.value ||
               profileUriData?.attributes?.[5]?.value ||
               profileUriData?.attributes?.[6]?.value) && (
-              <Divider
-                flexItem
-                orientation="vertical"
-                variant="middle"
-                sx={{
-                  display: { xs: "none", md: "block" },
-                  borderRightWidth: 4,
-                  ml: 1.3,
-                  mr: 2,
-                }}
-              />
-            )}
+                <Divider
+                  flexItem
+                  orientation="vertical"
+                  variant="middle"
+                  sx={{
+                    display: { xs: "none", md: "block" },
+                    borderRightWidth: 4,
+                    ml: 1.3,
+                    mr: 2,
+                  }}
+                />
+              )}
           </Stack>
           {/* Address, reputation */}
           <Stack
@@ -175,26 +175,7 @@ export default function AccountProfile(props: { address: string }) {
             {sales !== undefined && <AccountReputation sales={sales} />}
           </Stack>
         </Stack>
-        {/* Owner buttons */}
-        {/* {isAddressesEqual(address, props.address) && (
-          <Stack direction="column" spacing={2} sx={{ mt: 2 }}>
-            <Link href="/accounts/edit" legacyBehavior>
-              <LargeLoadingButton variant="contained">
-                {profileUriData ? "Edit Profile" : "Create Profile"}
-              </LargeLoadingButton>
-            </Link>
-            <LargeLoadingButton
-              variant="outlined"
-              onClick={() =>
-                showDialog?.(
-                  <AccountNotificationsDialog onClose={closeDialog} />
-                )
-              }
-            >
-              Notifications
-            </LargeLoadingButton>
-          </Stack>
-        )} */}
+
       </Box>
     );
   }

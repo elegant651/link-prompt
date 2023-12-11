@@ -45,11 +45,11 @@ function Logo(props: { sx?: SxProps }) {
       <Link href="/" passHref legacyBehavior>
         <MuiLink
           variant="h6"
-          color="#FF6600"
+          color="#328ca8"
           fontWeight={700}
           display={{ xs: "none", md: "flex" }}
         >
-          BiPrompt
+          LinkPrompt
         </MuiLink>
       </Link>
     </Box>
@@ -64,7 +64,7 @@ function Links(props: { sx?: SxProps }) {
       <Link href="/#prompts" passHref legacyBehavior>
         <MuiLink
           fontWeight={700}
-          color="#ff983f"
+          color="#328ca8"
           display={{ xs: "none", sm: "flex" }}
         >
           Find
@@ -73,7 +73,7 @@ function Links(props: { sx?: SxProps }) {
       <Link href="/prompts/create" passHref legacyBehavior>
         <MuiLink
           fontWeight={700}
-          color="#ff983f"
+          color="#328ca8"
           display={{ xs: "none", sm: "flex" }}
           ml={4}
         >

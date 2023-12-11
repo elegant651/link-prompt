@@ -12,7 +12,7 @@ export default function Footer(props: { sx?: SxProps }) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor: '#ff983f',
+        backgroundColor: '#328ca8',
         mt: 12,
         ...props.sx,
       }}
@@ -30,7 +30,7 @@ function Copyright(props: { sx?: SxProps }) {
         fontWeight={700}
         textAlign="center"
       >
-        BiPrompt © 2023
+        LinkPrompt © 2023
       </Typography>
     </Container>
   );

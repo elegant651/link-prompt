@@ -17,6 +17,8 @@ export default function usePromptsLoader(args?: { minter?: string }): {
   useEffect(() => {
     setPrompts(undefined);
 
+    setPrompts([{ id: 1, uri: 'ipfs://bafybeieppvspwxjrhqvclria5pjklflsd45qo3zay2se6yyyndkm4yddji/data.json' }]);
+
     // setPrompts([])
 
     // select data from table

@@ -45,7 +45,7 @@ export const ExtraLargeLoadingButton = styled(
   fontSize: "24px",
   fontWeight: 700,
   borderRadius: "8px",
-  background: '#FF6600',
+  background: '#328ca8',
   color: '#ffffa1',
   padding: "12px 30px",
   ...(variant === "outlined" && {
@@ -61,7 +61,7 @@ export const LargeLoadingButton = styled(LoadingButton)<LoadingButtonProps>(
   ({ theme, variant }) => ({
     fontSize: "18px",
     fontWeight: 700,
-    background: '#FF6600',
+    background: '#328ca8',
     color: '#ffffa1',
     borderRadius: "8px",
     padding: "14px 48px",

@@ -29,7 +29,7 @@ export default function useListingLoader(id: string | undefined): {
     args: [
       BigInt(id || 0),
       chainToSupportedChainPromptContractAddress(chain) ||
-        ethers.constants.AddressZero,
+      ethers.constants.AddressZero,
     ],
     enabled: Boolean(id),
     onError(error: any) {
@@ -42,6 +42,8 @@ export default function useListingLoader(id: string | undefined): {
    */
   useEffect(() => {
     setListing(undefined);
+
+
     if (
       listings &&
       listings.length > 0 &&

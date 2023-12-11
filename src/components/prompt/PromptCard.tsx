@@ -107,13 +107,12 @@ export default function PromptCard(props: {
             {promptUriData.title}
           </MuiLink>
         </Link>
-        <img
-          // src={promptUriData.imageUrl}
-          src={'/images/b1.png'}
+        {/* <img
+          src={promptUriData.imageUrl}
           alt={promptUriData.title}
           loading="lazy"
           style={{ maxWidth: '200px' }}
-        />
+        /> */}
       </Box>
     </CardBox>
   );

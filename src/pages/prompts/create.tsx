@@ -57,7 +57,7 @@ export default function CreatePrompt() {
    * Form states
    */
   const [formValues, setFormValues] = useState({
-    title: "Superman hops into his spaceship and heads for Earth",
+    title: "Amazon SEO prompt",
     prompt: "",
   });
   const formValidationSchema = yup.object({
@@ -91,22 +91,22 @@ export default function CreatePrompt() {
       hash: contractWriteData?.hash,
     });
 
-  const selectImage = (url: string) => {
-    console.log('imgUrl', url)
-    setSelectedImage(url)
-  }
+  // const selectImage = (url: string) => {
+  //   console.log('imgUrl', url)
+  //   setSelectedImage(url)
+  // }
 
-  async function searchImage(values: any) {
-    try {
-      setIsSearchLoading(true);
-      const images = await getImages(values.prompt)
-      setSearchData(images)
-    } catch (error: any) {
-      handleError(error, true);
-    } finally {
-      setIsSearchLoading(false);
-    }
-  }
+  // async function searchImage(values: any) {
+  //   try {
+  //     setIsSearchLoading(true);
+  //     const images = await getImages(values.prompt)
+  //     setSearchData(images)
+  //   } catch (error: any) {
+  //     handleError(error, true);
+  //   } finally {
+  //     setIsSearchLoading(false);
+  //   }
+  // }
 
   useEffect(() => {
     if (contractWriteData?.hash) {
@@ -126,46 +126,10 @@ export default function CreatePrompt() {
       // Upload prompt to lit protocol
       const { encryptedString, encryptedSymmetricKey } =
         await uploadPromptToLitProtocol(values.prompt);
-
-        console.log('d', encryptedString +"/"+ encryptedSymmetricKey)
-
-      // Upload prompt uri data to ipfs
-      const promptUriData: PromptUriDataEntity = {
-        author: author,
-        created: created,
-        title: values.title,
-        prompt: values.prompt,
-        promptEncryptedString: encryptedString,
-        promptEncryptedSymmetricKey: encryptedSymmetricKey,
-        imageUrl: selectedImage
-      };
-      const { uri } = await uploadJsonToIpfs(promptUriData);
-
-      //upload prompt image to ipfs
-      // selectedImage && await uploadJsonToIpfs({image: selectedImage})
-
-      console.log('uri', uri)
-      setSubmittedFormDataUri(uri);
-  
-    } catch (error: any) {
-      handleError(error, true);
-      setIsFormSubmitting(false);
-    }
-  }
-
-  async function submitFormTest(values: any) {
-    try {
-      setIsFormSubmitting(true);
-      // Define params
-      const author = address;
-      const created = new Date().getTime();
-      // Upload prompt to lit protocol
-      const { encryptedString, encryptedSymmetricKey } =
-        await uploadPromptToLitProtocol(values.prompt);
       // const encryptedString = 'encryptedString'
       // const encryptedSymmetricKey = 'encryptedSymmetricKey'
 
-        console.log('d', encryptedString +"/"+ encryptedSymmetricKey)
+      console.log('d', encryptedString + "/" + encryptedSymmetricKey)
 
       // Upload prompt uri data to ipfs
       const promptUriData: PromptUriDataEntity = {
@@ -175,13 +139,13 @@ export default function CreatePrompt() {
         prompt: values.prompt,
         promptEncryptedString: encryptedString,
         promptEncryptedSymmetricKey: encryptedSymmetricKey,
-        imageUrl: selectedImage
+        // imageUrl: selectedImage
       };
       const { uri } = await uploadJsonToIpfs(promptUriData);
 
       console.log('uri', uri)
       setSubmittedFormDataUri(uri);
-  
+
     } catch (error: any) {
       handleError(error, true);
       setIsFormSubmitting(false);
@@ -189,10 +153,10 @@ export default function CreatePrompt() {
   }
 
 
-   /**
-   * Upload prompt to lit protocol.
-   */
-   async function uploadPromptToLitProtocol(prompt: string) {
+  /**
+  * Upload prompt to lit protocol.
+  */
+  async function uploadPromptToLitProtocol(prompt: string) {
     if (!litNodeClient) {
       throw new Error("Lit Protocol is not ready");
     }
@@ -221,7 +185,7 @@ export default function CreatePrompt() {
       },
       litClient
     );
-    
+
     return {
       encryptedString: ciphertext,
       encryptedSymmetricKey: dataToEncryptHash,
@@ -288,7 +252,7 @@ export default function CreatePrompt() {
       <Formik
         initialValues={formValues}
         validationSchema={formValidationSchema}
-        onSubmit={submitFormTest}
+        onSubmit={submitForm}
       >
         {({ values, errors, touched, handleChange }) => (
           <Form
@@ -300,7 +264,7 @@ export default function CreatePrompt() {
             }}
           >
             <FormikHelper onChange={(values: any) => setFormValues(values)} />
-           
+
             <WidgetBox bgcolor={palette.purpleDark} mt={2}>
               <WidgetTitle>Title</WidgetTitle>
               <WidgetInputTextField
@@ -317,7 +281,7 @@ export default function CreatePrompt() {
                 sx={{ width: 1 }}
               />
             </WidgetBox>
-      
+
             {/* Prompt input */}
             <WidgetBox bgcolor={palette.greyDark} mt={2}>
               <WidgetTitle>Prompt</WidgetTitle>
@@ -335,19 +299,19 @@ export default function CreatePrompt() {
                 sx={{ width: 1 }}
               />
             </WidgetBox>
-            <ExtraLargeLoadingButton
+            {/* <ExtraLargeLoadingButton
               loading={isSearchLoading}
               variant="outlined"
               disabled={isSearchLoading}
-              sx={{ mt: 2, mb:2 }}
+              sx={{ mt: 2, mb: 2 }}
               onClick={() => searchImage(values)}
             >
               Search Prompt
-            </ExtraLargeLoadingButton>
+            </ExtraLargeLoadingButton> */}
 
-            {!selectedImage ?
+            {/* {!selectedImage ?
               <Grid container spacing={2} sx={{ mt: 2, mb: 4 }}>
-                {searchData.map((obj,index) => (
+                {searchData.map((obj, index) => (
                   <Grid item xs={4} key={index}>
                     <SearchCard url={obj.url} onClick={() => selectImage(obj.url)} />
                   </Grid>
@@ -355,7 +319,7 @@ export default function CreatePrompt() {
               </Grid>
               :
               <SearchCard url={selectedImage} />
-            }
+            } */}
 
 
             {/* Submit button */}

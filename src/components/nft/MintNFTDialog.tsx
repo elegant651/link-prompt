@@ -26,7 +26,7 @@ import {
 export default function MintNFTDialog(props: {
   id: string;
   prompt: string;
-  imageUrl: string;
+  // imageUrl: string;
   isClose?: boolean;
   onClose?: Function;
 }) {
@@ -53,7 +53,7 @@ export default function MintNFTDialog(props: {
       args: [
         "NFT #" + props.id,
         props.prompt,
-        props.imageUrl,
+        '' // props.imageUrl,
       ],
       chainId: chainToSupportedChainId(chain),
       onError(error: any) {

@@ -5,5 +5,5 @@ export default interface PromptUriDataEntity {
   prompt?: string;
   promptEncryptedString?: string;
   promptEncryptedSymmetricKey?: string;
-  imageUrl?: string;
+  // imageUrl?: string;
 }
